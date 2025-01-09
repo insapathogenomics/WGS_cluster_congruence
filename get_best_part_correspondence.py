@@ -14,8 +14,8 @@ import textwrap
 import glob
 import pandas
 
-version = "1.0.0"
-last_updated = "2024-07-26"
+version = "1.0.1"
+last_updated = "2025-01-09"
 
 def get_correspondence_all(input_dir, score):
     final = {"comparison": [], "method1": [], "method2": []}
@@ -38,10 +38,10 @@ def get_correspondence_all(input_dir, score):
                     max_value = max(l[1:])
                     pos = [i for i, j in enumerate(l[1:]) if j == max_value]
                     if len(pos) == 1:
-                        method1_pos = counter
+                        method1_pos = counter - 1
                         method2_pos = pos[0]
                     else:
-                        method1_pos = counter
+                        method1_pos = counter - 1
                         dists = []
                         for val in pos:
                             dist = abs(counter - int(val))
@@ -59,7 +59,7 @@ def get_correspondence_all(input_dir, score):
                         final["method2"].append("-")
                 counter += 1    
         mx = pandas.read_table(filename)
-        counter2 = 1
+        counter2 = 0
         if "/" in filename:
             fname = filename.split("/")[-1]
         else:
